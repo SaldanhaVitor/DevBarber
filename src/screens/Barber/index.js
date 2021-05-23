@@ -88,6 +88,7 @@ export default () => {
 
     const handleFavClick = () => {
         setFavorited(!favorited);
+        Api.setFavorite(userInfo.id);
     }
 
     const handleServiceChoose = (key) => {
