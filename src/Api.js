@@ -488,7 +488,7 @@ export default ({
                             ]
                         },
                         {
-                            "date": "2021-05-30",
+                            "date": "2021-07-30",
                             "hours": [
                                 "10:00",
                                 "11:00",
@@ -647,7 +647,6 @@ export default ({
         //     default:
         //         break;
         // }
-        console.log(json)
         return json;
     },
 });
