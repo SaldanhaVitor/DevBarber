@@ -259,19 +259,23 @@ export default ({ show, setShow, user, service }) => {
             selectedDay > 0 &&
             selectedHour != null
         ) {
-            let res = await Api.setAppointment(
-                user.id,
-                user.services[service].id,
+            const selectedService = user.services[service];
+            const mes = selectedMonth + 1
+            const res = await Api.setAppointment(
+                user,
+                selectedService,
                 selectedYear,
-                selectedMonth + 1,
+                mes,
                 selectedDay,
                 selectedHour
             );
-            if (res.error == '') {
+            if (res.status !== 201) {
+                alert(res.error);
+            } else {
                 setShow(false);
                 navigation.navigate('Appointments');
-            } else {
-                alert(res.error);
+
+                alert('Agendamento realizado com sucesso!');
             }
         } else {
             alert("Preencha todos os dados");
