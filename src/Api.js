@@ -261,9 +261,6 @@ export default ({
     },
     deleteAppointment: async (id, boolean) => {
         const token = await AsyncStorage.getItem('token');
-        const request = {
-            canceled: boolean
-        }
         const req = await fetch(`${BASE_HER_API}/appointment/${id}`, {
             method: 'DELETE',
             headers: {
