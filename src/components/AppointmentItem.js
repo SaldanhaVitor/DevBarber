@@ -45,6 +45,7 @@ const DateText = styled.Text`
 `;
 const CancelButton = styled.TouchableOpacity`
     background-color: #4EADBE;
+    flex: 1;
     height: 40px;
     justify-content: center;
     align-items: center;
@@ -81,7 +82,7 @@ export default ({ data }) => {
                     text: "Sim",
                     onPress: async () => {
                         const id = data.appointment_id;
-                        const res = await Api.deleteAppointment(id, true);
+                        const res = await Api.deleteAppointment(id, data);
 
                         if (!res.error) {
                             Alert.alert(
@@ -105,7 +106,7 @@ export default ({ data }) => {
                 <Avatar source={{ uri: data.barber.avatar }} />
                 <UserName>{data.barber.name}</UserName>
                 <CancelButton onPress={data.old ? null : handleCancelaAtendimento}>
-                    <CancelButtonText>Cancel. Atend.</CancelButtonText>
+                    <CancelButtonText>Cancelar</CancelButtonText>
                 </CancelButton>
             </UserArea>
 

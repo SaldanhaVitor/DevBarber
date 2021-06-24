@@ -237,6 +237,7 @@ export default ({ show, setShow, user, service }) => {
         setSelectedYear(mountDate.getFullYear());
         setSelectedMonth(mountDate.getMonth());
         setSelectedDay(0);
+        setListDays([]);
     }
     const handleRightDateClick = () => {
         let mountDate = new Date(selectedYear, selectedMonth, 1);
@@ -244,6 +245,7 @@ export default ({ show, setShow, user, service }) => {
         setSelectedYear(mountDate.getFullYear());
         setSelectedMonth(mountDate.getMonth());
         setSelectedDay(0);
+        setListDays([]);
     }
 
     const handleCloseButton = () => {

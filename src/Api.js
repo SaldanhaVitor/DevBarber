@@ -259,7 +259,7 @@ export default ({
         const json = await req.json();
         return json;
     },
-    deleteAppointment: async (id, boolean) => {
+    deleteAppointment: async (id, data) => {
         const token = await AsyncStorage.getItem('token');
         const req = await fetch(`${BASE_HER_API}/appointment/${id}`, {
             method: 'DELETE',
@@ -267,7 +267,8 @@ export default ({
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 token
-            }
+            },
+            body: JSON.stringify(data)
         });
         const json = await req.json();
         return json;
