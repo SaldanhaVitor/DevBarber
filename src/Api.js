@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { UserContext } from './contexts/UserContext';
 const BASE_API = 'https://api.b7web.com.br/devbarber/api';
 const BASE_HER_API = 'https://devbarber-example.herokuapp.com';
 
@@ -24,9 +25,35 @@ export default ({
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, password })
-        }
-        );
+        });
         const json = await req.json();
+
+        const body = {
+            data: json.data,
+            token: json.token
+        }
+
+        const existUser = await fetch(`${BASE_HER_API}/user`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: body.token
+            }
+        });
+        const responseUser = await existUser.json();
+
+        if (responseUser.error) {
+            await fetch(`${BASE_HER_API}/user/create`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+        }
+
         return json;
     },
     SignUp: async (name, email, password) => {
@@ -40,6 +67,34 @@ export default ({
         }
         );
         const json = await req.json();
+
+        const body = {
+            data: json.data,
+            token: json.token
+        }
+
+        const existUser = await fetch(`${BASE_HER_API}/user`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: body.token
+            }
+        });
+
+        const responseUser = await existUser.json();
+
+        if (responseUser.error) {
+            await fetch(`${BASE_HER_API}/user/create`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+        }
+
         return json;
     },
     logout: async () => {
@@ -59,43 +114,7 @@ export default ({
         const token = await AsyncStorage.getItem('token');
         const req = await fetch(`${BASE_API}/barbers?token=${token}&lat=${lat}&lng=${lng}&address=${address}`);
         const json = await req.json();
-
-        // json.data.push(
-        //     {
-        //         id: 4,
-        //         name: "Kevin Adams",
-        //         avatar: 'https://lh5.googleusercontent.com/proxy/xzBXgM3WrKn68u5OaWKmPoWfKbcMufX1XDdzBwFvoCLOYTMn_PBGF5p40r6DhvGKRHpOMtRcd0xoZF7v_bCBGriCW8zaKmQKr9hmkxYkFI4BHqVeWAV0QdqaKg=w1200-h630-p-k-no-nu',
-        //         stars: 5,
-        //         latitude: "-23.5730907",
-        //         longitude: "-46.6682795",
-        //         distance: 0.691000000000108
-        //     },
-        //     {
-        //         id: 1,
-        //         name: "Manoela Machado",
-        //         avatar: 'https://www.rbsdirect.com.br/imagesrc/24845303.jpg?w=700',
-        //         stars: 4.9,
-        //         latitude: "-23.5730907",
-        //         longitude: "-46.6682795",
-        //         distance: 0.691000000000108
-        //     }
-        // );
-
-        // json.data
-        //     .sort((a, b) => a.stars < b.stars ? 1 : -1)
-        //     .map(b => {
-        //         if (b.name === 'Leticia Diniz') {
-        //             b.name = 'Leticia Fernanda'
-        //             b.avatar = 'https://uploads.metropoles.com/wp-content/uploads/2021/02/25154218/LuanaBarbeira2.jpg'
-        //         }
-        //         if (b.name === 'Amanda Sousa') {
-        //             b.name = 'Amanda Salistre'
-        //             b.avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTorFgjFc14z10jFB_R4twh0JL1DSjwGYH-rxJKN-JLhijL4QsCoICc9MpZk8IRC-lrByo&usqp=CAU'
-        //         }
-        //         if (b.name === 'Ronaldo Gomes') {
-        //             b.name = 'Felipe Gomes'
-        //         }
-        //     })
+        json.data.sort((a, b) => a.stars < b.stars ? 1 : -1);
         return json;
     },
     getBarber: async (id) => {
@@ -288,4 +307,17 @@ export default ({
         const json = await req.json();
         return json;
     },
+    getUser: async () => {
+        const token = await AsyncStorage.getItem('token');
+        const req = await fetch(`${BASE_HER_API}/user`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token
+            }
+        });
+        const json = await req.json();
+        return json;
+    }
 });

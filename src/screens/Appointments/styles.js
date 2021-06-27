@@ -6,7 +6,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Scroller = styled.ScrollView`
-    margin-top: 80px;
+    margin-top: 50px;
     flex: 1;
     padding: 0 20px;
 `;

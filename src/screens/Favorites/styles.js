@@ -10,12 +10,6 @@ export const HeaderArea = styled.View`
     justify-content: center;
     padding: 60px 30px;
 `;
-export const HeaderTitle = styled.Text`
-    font-size: 18px;
-    font-weight: bold;
-    color: #FFFFFF;
-`;
-
 
 export const Scroller = styled.ScrollView`
     flex: 1;
@@ -25,7 +19,6 @@ export const LoadingIcon = styled.ActivityIndicator`
     margin-top: 30px;
 `;
 export const ListArea = styled.View`
-    margin-top: 20px;
     margin-bottom: 20px;
 `;
 

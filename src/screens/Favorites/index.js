@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
     Container,
     HeaderArea,
-    HeaderTitle,
     Scroller,
     ListArea,
     EmptyWarning
@@ -11,6 +10,8 @@ import {
 import BarberItem from '../../components/BarberItem';
 import Api from '../../Api';
 import { RefreshControl } from 'react-native';
+import PageTitle from '../../components/TitleItem';
+
 
 export default () => {
 
@@ -38,7 +39,7 @@ export default () => {
     return (
         <Container>
             <HeaderArea>
-                <HeaderTitle>Favoritos</HeaderTitle>
+                <PageTitle page={'Favoritos'} />
             </HeaderArea>
 
             <Scroller refreshControl={

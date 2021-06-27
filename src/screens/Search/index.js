@@ -6,11 +6,13 @@ import {
     Scroller,
     LoadingIcon,
     ListArea,
+    HeaderArea,
     EmptyWarning
 } from './styles';
 
 import BarberItem from '../../components/BarberItem';
 import Api from '../../Api';
+import PageTitle from '../../components/TitleItem';
 
 export default () => {
 
@@ -44,6 +46,10 @@ export default () => {
 
     return (
         <Container>
+            <HeaderArea>
+                <PageTitle page={'Pesquisar'} />
+            </HeaderArea>
+
             <SearchArea>
                 <SearchInput
                     placeholder="Digite o nome do barbeiro"

@@ -20,6 +20,11 @@ export const SearchInput = styled.TextInput`
     color: #FFFFFF
 `;
 
+export const HeaderArea = styled.View`
+    margin-top: 60px;
+    padding: 0 30px;
+    height: 0px;
+`;
 
 export const Scroller = styled.ScrollView`
     flex: 1;

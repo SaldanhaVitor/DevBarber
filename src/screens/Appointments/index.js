@@ -9,6 +9,7 @@ import {
 
 import AppointmentItem from '../../components/AppointmentItem';
 import Api from '../../Api';
+import PageTitle from '../../components/TitleItem';
 
 export default () => {
 
@@ -36,6 +37,7 @@ export default () => {
             <Scroller refreshControl={
                 <RefreshControl refreshing={loading} onRefresh={getAppointments} />
             }>
+                <PageTitle page={'Agendamentos'} />
 
                 {!loading && list.length === 0 &&
                     <EmptyWarning>Não há agendamentos.</EmptyWarning>
